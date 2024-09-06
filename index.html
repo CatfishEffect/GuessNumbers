@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>猜数字游戏</title>
+</head>
+<body>
+    <h1>猜数字游戏</h1>
+    <p>我已经选择了1到100之间的一个整数，试着猜一猜吧！</p>
+    <input type="number" id="guessInput" placeholder="输入你的猜测">
+    <button onclick="makeGuess()">猜测</button>
+    <p id="message"></p>
+    <p id="score"></p>
+
+    <script>
+        let answer = Math.floor(Math.random() * 100) + 1; // 随机生成1到100之间的整数
+        let guessCount = 0; // 猜测次数
+        let maxAttempts = 9; // 最多猜测次数
+        let gameOver = false; // 游戏是否结束
+
+        function makeGuess() {
+            if (gameOver) return; // 如果游戏结束，不再处理新的猜测
+
+            let guessInput = document.getElementById("guessInput");
+            let guess = parseInt(guessInput.value);
+            guessCount++; // 猜测次数加1
+
+            if (isNaN(guess) || guess < 1 || guess > 100) {
+                document.getElementById("message").innerText = "请输入1到100之间的有效数字！";
+                return;
+            }
+
+            if (guess === answer) {
+                document.getElementById("message").innerText = "恭喜你，猜对了！";
+                calculateScore();
+                gameOver = true;
+            } else if (guess < answer) {
+                document.getElementById("message").innerText = "猜的数字太小了！";
+            } else {
+                document.getElementById("message").innerText = "猜的数字太大了！";
+            }
+
+            if (guessCount >= maxAttempts && !gameOver) {
+                document.getElementById("message").innerText = `游戏结束，你的机会用完了！正确答案是 ${answer}`;
+                calculateScore();
+                gameOver = true;
+            }
+        }
+
+        function calculateScore() {
+            let scoreMessage = "";
+            if (guessCount === 1) {
+                scoreMessage = "你只用了一次猜中，赢得了5美元！";
+            } else if (guessCount === 2) {
+                scoreMessage = "你用了两次猜中，赢得了4美元！";
+            } else if (guessCount === 3) {
+                scoreMessage = "你用了三次猜中，赢得了3美元！";
+            } else if (guessCount === 4) {
+                scoreMessage = "你用了四次猜中，赢得了2美元！";
+            } else if (guessCount === 5) {
+                scoreMessage = "你用了五次猜中，赢得了1美元！";
+            } else if (guessCount === 6) {
+                scoreMessage = "你用了六次猜中，没赚没亏。";
+            } else if (guessCount === 7) {
+                scoreMessage = "你用了七次猜中，你欠我1美元。";
+            } else if (guessCount === 8) {
+                scoreMessage = "你用了八次猜中，你欠我2美元。";
+            } else if (guessCount === 9) {
+                scoreMessage = "你用了九次猜中，你欠我3美元。";
+            }
+
+            document.getElementById("score").innerText = scoreMessage;
+        }
+    </script>
+</body>
+</html>
