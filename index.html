@@ -16,6 +16,19 @@
     <p id="message"></p>
     <p id="score"></p>
     <button onclick="goOn()">重置</button>
+    <p>游戏规则</p>
+    <ul>
+        <li>猜对一次，赢得5元</li>
+        <li>猜对两次，赢得4元</li>
+        <li>猜对三次，赢得3元</li>
+        <li>猜对四次，赢得2元</li>
+        <li>猜对五次，赢得1元</li>
+        <li>猜对六次，没赚没亏</li>
+        <li>猜对七次，你欠我1元</li>
+        <li>猜对八次，你欠我2元</li>
+        <li>猜对九次，你欠我3元</li>
+        <li>奖励超过10块可获赠奶茶</li>
+    </ul>
     <script>
         let answer = Math.floor(Math.random() * 100) + 1; // 随机生成1到100之间的整数
         let guessCount = 0; // 猜测次数
